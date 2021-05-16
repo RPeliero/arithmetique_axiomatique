@@ -1,0 +1,460 @@
+
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\title{\underline{Arithmétique des entiers dans différentes axiomatiques}}
+\date{}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\section{$\mathbb{N}$ dans l'axiomatique de Peano}
+\subsection{Axiomatique de Peano}
+\subsubsection{Cas général}
+De manière abstraite, on dit que l'ensemble $(E,c,f)$ vérifie l'axiomatique de Peano lorsque :
+
+(1) $c \in E$
+
+(2) $f \in \mathcal{F}(E,E)$
+
+(3) $c \notin Im(f)$
+
+(4) $\forall (x,y) \in E^2, [x \ne y] \Rightarrow [f(x) \ne f(y)]$
+
+(5) $\forall F \subset E, [c \in F \; \wedge \; f(F) \subset F] \Rightarrow [F = E]$
+
+\subsubsection{Cas particulier de $\mathbb{N}$}
+
+Dans le cas de l'ensemble des entiers naturels $\mathbb{N}$, le couple $(E,c,f)$ devient $(\mathbb{N},0,s)$.
+
+Les axiomes de Peano deviennent ainsi :
+
+(1) $0 \in \mathbb{N}$
+
+(2) $s$ est une application de $\mathbb{N}$ dans lui-même
+
+(3) $0$ n'est le successeur d'aucun entier naturel
+
+(4) Si deux entiers ont le même successeurs, ils sont égaux
+
+(5) Si une partie d'entiers naturels contient 0 et le successeur de chacun de ses éléments, alors il s'agit de $\mathbb{N}$
+
+\subsubsection{Axiomes supplémentaires}
+
+On précise que l'on va également utiliser certains axiomes de la logique, ou encore ceux définissant la relation d'égalité :
+$$ [\neg(\forall a \in A, P(a))] \equiv [\exists a \in A \; ; \; \neg P(a)] $$
+$$(Sym_{=}): [a=b] \Rightarrow [b=a]$$
+$$(Trans_{=}) : [a=b \wedge b=c] \Rightarrow [a=c]$$
+\subsection{Démonstration de résultats élémentaires}
+
+\subsubsection{La loi d'addition}
+On va tout d'abord définir la loi de composition interne d'addition dans $\mathbb{N}$ par les deux propriétés suivantes :
+$$(P_1) \; \forall n \in \mathbb{N}, n + 0 = n$$
+$$(P_2) \; \forall (a,b) \in \mathbb{N}^2, a + s(b) = s(a+b)$$
+\subsubsection{Deux propriétés fondamentales}
+
+
+Montrons tout d'abord que l'addition est associative et commutative :
+
+Autrement dit :
+$$(A_+) : \forall (a,b,c) \in \mathbb{N}^3, a+(b+c) = (a+b)+c $$
+$$(C_+) : \forall (a,b) \in \mathbb{N}^2, a+b=b+a$$
+\\
+
+\textbf{Démonstration de l'associativité :}
+
+Soient $(a,b) \in \mathbb{N}^2$, on va raisonner par récurrence sur $c$. On pose donc $\mathcal{C} = \{ c \in \mathbb{N} \; ; \; a+(b+c) = (a+b)+c \}$.
+
+D'après la propriété $(P_1)$ de l'addition, on sait que : 
+$$ a + (b + 0) = a + b = (a + b) + 0$$
+On a donc que : $0 \in \mathcal{C}$
+
+Soit $p \in \mathcal{C}$, on veut montrer que $s(p) \in \mathcal{C}$.
+
+D'après la propriété $(P_2)$ de l'addition, on a :
+$$ a + (b+s(p)) = a + s(b+p)$$
+
+Par la même propriété, on a que :
+$$ a + s(b+p) = s(a + (b+p)) $$
+
+Or, $p \in \mathcal{C}$, donc :
+$$ a + (b+p) = (a + b) + p $$
+
+Donc :
+$$ s(a+(b+p)) = s((a+b)+p) $$
+
+Puis, par la symétrie de la relation d'égalité, ainsi que par la propriété $(P_2)$ de l'addition, on sait que :
+$$s((a+b)+p) = (a+b) + s(p)$$
+
+D'où par transitivité de l'égalité :
+$$ a + (b + s(p)) = (a+b) + s(p) $$
+
+Et ainsi, $p \in \mathcal{C} \Rightarrow s(p) \in \mathcal{C}$
+
+On a donc montré que $\mathcal{C}$ est une partie de $\mathbb{N}$ contenant $0$ et stable par $s$ ($s(\mathcal{C}) \subset \mathcal{C}$)
+
+Ainsi, par l'axiome (5) (principe de récurrence), on a que $\boxed{\textup{l'addition est associative}}$
+\\
+
+\textbf{Démonstration de la commutativité :}
+
+On aura besoin de deux lemmes :
+\\
+
+\textbf{Lemme 1 :} $(L_1) : \forall n \in \mathbb{N}, n + 0 = 0+n = n$
+\\
+
+On le montre par récurrence sur n : 
+
+Initialisation : $0+0 = 0+0 = 0$
+
+Hérédité : Soit $n \in \mathbb{N}$, on suppose que $n + 0 = 0+n = n$
+
+On sait par $(P_1)$ que $s(n) + 0 = s(n)$
+
+Par $(P_2)$, on a d'autre part que $0 + s(n) = s(0+n)$
+
+Par hypothèse de récurrence, on a que $0 + n = n$
+
+Ainsi, en passant au successeur, on trouve que $s(0+n) = s(n)$
+
+D'où, par transitivité de l'addition : $s(n) + 0 = 0 + s(n) = s(n)$
+
+Par récurrence, on a montré $(L_1)$
+\\
+
+\textbf{Lemme 2 :} $(L_2) : \forall (n,p) \in \mathbb{N}^2, s(p) + n = s(p+n)$
+
+On va raisonner par récurrence sur $n$ :
+
+On note $\mathcal{N} = \{ n \in \mathbb{N} \; ; \; \forall p \in \mathbb{N}, s(p) + n = s(p+n) \}$
+
+Initialisation : D'après $(P_1), \forall p \in \mathbb{N}, s(p) + 0 = s(p)$ 
+
+Puis, grâce à $(P_2), \forall p \in \mathbb{N}, s(p) + 0 = s(p+0)$
+
+Or, par $(P_1), \forall p \in \mathbb{N}, p+0=p$
+
+D'où par transitivité de l'égalité, $0 \in \mathcal{N}$
+
+Hérédité : Soit $n \in \mathcal{N}$
+
+D'après $(P_2), \forall p \in \mathbb{N}, s(p) + s(n) = s(s(p) + n)$
+
+Ainsi, par hypothèse de récurrence, $\forall p \in \mathbb{N}, s(s(p)+n) = s(s(p+n))$
+
+De plus, on a, d'après $(P_2), \forall p \in \mathbb{N}, s(p+s(n)) = s(s(p+n)) $
+
+Ainsi, par symétrie, puis transitivité de l'égalité, $s(p) + s(n) = s(p+s(n))$
+
+Autrement dit : $s(\mathcal{N}) \subset \mathcal{N}$
+
+Donc par principe de récurrence, on a prouvé $(L_2)$
+\\
+
+On peut maintenant montrer la commutativité de l'addition :
+
+On raisonne par récurrence sur $b$ en notant $$\mathcal{B} = \{ b \in \mathbb{N} \; ; \; \forall a \in \mathbb{N}, a + b = b + a \}$$ 
+
+Inialisation : D'après $(L_1)$, on sait que 
+$$0 \in \mathcal{B}$$
+
+Hérédité : On se donne $b \in mathcal{B}$.
+
+Par $(P_2)$, on a :
+$$\forall a \in \mathbb{N}, a + s(b) = s(a+b)$$
+
+Puis, comme $b \in \mathcal{B}$ :
+$$\forall a \in \mathbb{N}, s(a+b) = s(b+a)$$
+
+Enfin, en appliquant $(L_2)$, ainsi que $(Sym_=)$, on trouve :
+$$\forall a \in \mathbb{N}, s(b+a) = s(b) + a$$
+
+D'où, d'après $(Trans_=)$,
+$$s(b) \in \mathcal{B}$$
+
+On a donc que $0 \in \mathcal{B}$, et $s(\mathcal{B}) \subset \mathcal{B}$. Autrement dit, par le principe de récurrence, $$\mathcal{B} = \mathbb{N}$$
+
+Ainsi, $\boxed{\textup{l'addition est commutative}}$
+
+\subsubsection{Une égalité connue}
+Montrons alors une égalité fameuse : 
+$$1+1 = 2$$
+
+Premièrement, on va l'exprimer avec les notations de l'arithmétique de Peano. C'est-à-dire qu'on ne s'autorisera à utiliser que les symboles $0,+,\times,=,s$, ainsi que les opérateurs et quantificateurs logiques :
+$$s(0) + s(0) = s(s(0))$$
+
+D'après la propriété $(P_2)$ de l'addition, on a :
+$$s(0) + s(0) = s(s(0) + 0)$$
+
+Puis, grâce à la propriété $(P_1)$ de l'addition, on obtient :
+$$s(0) + 0 = s(0)$$
+
+Ainsi, en passant au successeur :
+$$s(s(0)+0) = s(s(0))$$
+
+Enfin, par la transitivité de l'égalité, puisque $s(0)+s(0)=s(s(0)+0)$ et que $s(s(0)+0)=s(s(0))$, on a :
+$$\boxed{s(0)+s(0)=s(s(0))}$$
+Autrement dit :
+$$\boxed{1+1=2}$$
+
+\subsubsection{Une généralisation}
+Montrons maintenant la propriété suivante :
+$$\forall n \in \mathbb{N}, n + s(0) = s(n)$$
+
+Tout d'abord, notons $\mathcal{P} = \{ n \in \mathbb{N} \; ; \; n + s(0) = s(n) \}$. On remarque que d'après le point précédent, $0 \in \mathcal{P}$.
+
+Soit $k \in \mathcal{P}$, on va montrer que $s(k) \in \mathcal{P}$
+
+On sait que : 
+$$k + s(0) = s(k)$$
+
+On passe alors au successeur :
+$$s(k+s(0)) = s(s(k))$$
+
+Or, d'après la propriété $(P_2)$ de l'addition :
+$$s(k) + s(0) = s(k + s(0))$$
+
+De plus, commme l'addition est commutative :
+$$s(k + s(0)) = s(s(0) + k)$$
+
+Ainsi, par transitivité de l'addition, on a bien que :
+$$s(k) + s(0) = s(s(k))$$
+
+Autrement dit, $0 \in \mathcal{P}$, et $s(\mathcal{P}) \subset \mathcal{P}$. Donc par principe de récurrence, $\mathcal{P} = \mathbb{N}$
+\\
+
+Conclusion : 
+$$\boxed{\forall n \in \mathbb{N}, n + s(0) = s(n)}$$
+\\
+
+\section{$\mathbb{N}$ dans l'axiomatique ZF}
+
+Dans la théorie de Zermelo-Fraenkel, les objets sont liés par deux relations. Une d'équivalence, et l'autre d'ordre.
+
+La relation d'ordre sur les objets de ZF sera notée $\in$, et pourra être interprétée comme signifiant une appartenance.
+
+La relation d'équivalence, elle, sera notée $=$, et pourra être interprétée comme signifiant une égalité.
+
+\subsection{Énoncé des axiomes de la théorie ZF utiles à la construction de $\mathbb{N}$}
+\subsubsection{Axiome de l'ensemble vide}
+$$\boxed{\exists x \; ; \; \forall y, \neg(y \in x)}$$
+
+Cet axiome suppose l'existence d'un objet qui ne contient aucun objet de la théorie.
+
+On notera cet objet $\varnothing$ et on le désignera par le nom d'ensemble vide.
+
+\subsubsection{Axiome d'extensionalité}
+$$\boxed{\forall (X,Y), [\forall z,(z \in X) \Leftrightarrow (z \in Y)] \Rightarrow [X=Y]}$$
+
+Plus simplement, cet axiome exprime 
+
+\textbf{Un premier théorème :}
+On peut déjà montrer que l'ensemble vide est unique.
+
+En effet, supposons qu'il existe deux ensembles $V_1$ et $V_2$, vérifiant l'axiome de l'ensemble vide.
+
+On va traduire l'équivalence de l'axiome d'extensionalité :
+$$\forall z,(z \in X) \Leftrightarrow (z \in Y) \equiv \forall z,[(\neg(z\in X))\lor(z \in Y)]\wedge [(z \in X) \lor \neg(z \in Y)]$$
+
+Or, puisque $V_1$ vérifie l'axiome de l'ensemble vide, on a 
+$$\forall z, \neg(z \in V_1)$$
+
+De même, 
+$$\forall z, \neg(z \in V_2)$$
+
+Ainsi, l'équivalence est vérifiée. On peut donc, par l'axiome d'extensionalité, affirmer que 
+$$V_1 = V_2$$
+
+\subsubsection{Axiome de la paire}
+
+$$\boxed{\forall x \forall y, \exists P \; ; \; \forall z, [z \in P] \Leftrightarrow [(z = x) \lor (z = y)]}$$
+
+On peut comprendre cet axiome comme l'existence d'un objet contenant les deux objets donnés $x$ et $y$.
+
+On notera cet ensemble $\{ x,y \}$, et on parlera de paire.
+
+\textbf{Application à l'ensemble vide :}
+De cet axiome appliqué à l'ensemble vide - en posant $x = y = \varnothing$, il vient que $P = \{\varnothing ,\varnothing \}$.
+
+Or, puisque le seul élément que contient $P$ est $\varnothing$, on remarque avec l'axiome d'extensionalité que : $P = \{ \varnothing \}$
+\\
+
+Plus généralement, l'axiome de la paire nous permet d'affirmer que :
+
+$$\forall x, \exists \{ x \}$$
+
+\subsubsection{Axiome de l'union}
+
+$$\boxed{\forall X \forall Y, \exists U \; ; \; \forall z, [z \in U] \Leftrightarrow [(z \in X) \lor (z \in Y)]}$$
+
+On peut aisément comprendre que cet axiome nous donne l'existence d'un objet composé des éléments de $X$ et de $Y$.
+
+Pour deux objets $X$ et $Y$ donnés, on notera un tel ensemble $X \cup Y$
+\\
+
+\textbf{Précision :}
+
+En réalité, l'axiome de l'union s'énonce comme suit :
+$$\boxed{\forall X, \exists U_X \; ; \; \forall z, [z \in U_X] \Leftrightarrow [\exists Y \; ; \; [(Y \in X) \wedge (z \in Y)]]}$$
+
+Autrement dit, $U_X$ est l'ensemble des éléments des éléments de $X$.
+
+Plus clairement, $U_X$ est formé de l'union des éléments de $X$
+\\
+
+Ainsi, pour tous ensemble $X$ et $Y$, on se donne $P = \{X,Y\}$ 
+
+Puis, par l'axiome de l'union, on obtient $U_P$ 
+
+Par axiome d'extensionalité, $U_P$ est égal à $X \cup Y$
+
+\subsubsection{Construction d'une suite d'objets}
+
+Grâce à ces axiomes, on peut construire une suite d'objets de la théorie ZF assez structurés :
+
+On va noter $X_0 = \varnothing$ et $X_{n+1} = X_n \cup \{X_n\}$
+
+On a donc :
+
+- $X_0 = \varnothing$
+
+- $X_1 = \{\varnothing\}$
+
+- $X_2 = \{\varnothing , \{\varnothing\}\}$
+
+- $X_3 = \{\varnothing , \{\varnothing\} , \{\varnothing, \{ \varnothing \} \} \}$
+
+- $X_4 = \{\varnothing , \{\varnothing\} , \{\varnothing, \{ \varnothing \} \} , \{ \varnothing , \{\varnothing\} , \{\varnothing, \{ \varnothing \} \} \} \}$
+
+Et ainsi de suite.
+\\
+
+Pour être parfaitement rigoureux, et ne pas utiliser de symboles d'entiers naturels, que l'on est pas censé connaître, jusqu'alors, on va donc noter $S$ l'application de succession (semblable à celle que l'on avait définie dans l'arithmétique de Peano), qui à tout ensemble $X$ associe
+$$S(X) = X \cup \{X\}$$
+
+\subsubsection{Axiome de l'infini}
+
+$$\boxed{\exists I \; ; \; (\varnothing \in I) \wedge (x \in I \Rightarrow S(x) \in I)}$$
+
+On dispose donc d'un ensemble $I$ qui contient l'ensemble vide, et qui est stable par passage au successeur.
+\\
+
+Cependant, si l'on peut avoir envie de noter un tel ensemble $\mathbb{N}$, en assimilant $\varnothing$ à $0$, il n'en est rien. En effet, Il se pourrait tout autant que l'ensemble $I$ contienne une infinité de "branches parallèles" issues d'autres éléments que $\varnothing$.
+
+\subsubsection{Schéma d'axiome par compréhension}
+
+$$\boxed{\forall P \forall X, \exists Y ; \forall x[(x \in Y) \Leftrightarrow (x \in X  \wedge P(x))]}$$
+
+Et ce, quelle que soit la propriété $P$, dès lors qu'on peut l'écrire dans le langage du premier ordre de la théorie ZFC.
+
+On notera plus simplement $Y = \{ x \in X \; ; \; P(x) \}$
+\\
+
+On remarque que la propriété ne peut notamment pas faire référence à $Y$, sinon, il serait possible de définir des ensembles tels que l'ensemble 
+$$\Omega = \{X \; ; \; X \notin X \}$$
+Qui donne lieu au fameux paradoxe de Russel, lorsque l'on vient à se poser la question $$\boxed{\Omega \overset{?}{\in} \Omega}$$
+
+\subsection{Définition de $\mathbb{N}$}
+
+\subsubsection{Définition par compréhension}
+On va définir l'ensemble des entiers naturels par compréhension à partir de l'ensemble $I$:
+
+$$\boxed{\mathbb{N} = \{n \in I \; ; \; \forall E, [(\varnothing \in E) \wedge (x \in E \Rightarrow S(x) \in E)] \Rightarrow n \in E \}}$$
+
+On a ainsi, dans ce cas, la propriété $P$ qui est la suivante :
+
+$$P(n) : \forall E, [(\varnothing \in E) \wedge (x \in E \Rightarrow S(x) \in E)] \Rightarrow n \in E$$
+
+Cette propriété énonce que tout ensemble $E$ contenant le vide et étant stable par par passage au successeur contient $n$. 
+
+On a ainsi défini $\mathbb{N}$ comme étant le plus petit sous-ensemble de I (au sens de l'inclusion) contenant $\varnothing$ et étant stable par $S$.
+\\
+
+Cependant, cette définition, tout comme celle de l'arithmétique de Peano, n'exclut pas l'existence de branches parallèles.
+\\
+
+\textbf{Parenthèse sur la relation d'inclusion :}
+
+On peut définir une autre relation d'ordre sur les éléments de la théorie ZFC, dénotée par le symbole $\subset$, et vérifiant :
+$$\forall X, \forall Y, [X \subset Y] \Leftrightarrow [\forall z, (z \in X) \Rightarrow (z \in Y)]$$
+
+\subsubsection{Le théorème de récurrence}
+
+\textbf{Théorème :}
+$$\forall P, [P(\varnothing) \wedge (\forall n, P(n) \Rightarrow P(S(n)))] \Rightarrow [\forall n \in \mathbb{N}, P(n)]$$
+
+\textbf{Démonstration :}
+
+On pose $\mathcal{P} = \{n \in \mathbb{N} \; ; \; P(n) \}$.
+
+Il suffit de montrer que, dans les hypothèses du théorème, $\mathcal{P} = \mathbb{N}$
+
+\subsection{Définition de l'addition}
+\subsubsection{Axiome de l'ensemble des parties}
+$$\boxed{\forall X, \exists P \; ; \; \forall Y, [Y \in P] \Leftrightarrow [Y \subset X]}$$
+
+Autrement dit, si l'on dispose d'un ensemble $X$, on peut construire l'ensemble des sous-ensembles de $X$. On notera cet ensemble $\mathcal{P}(X)$.
+
+
+\subsubsection{Définition du produit cartésien}
+
+On va ensuite définir le produit cartésien de deux ensembles. Pour cela, il nous faut définir la notion de couple, différemment de celle de paire.
+
+En effet, par l'axiome d'extensionalité, $\{x,y\} = \{y,x\}$. La notion de paire ne dépend donc pas de l'ordre.
+
+On va donc poser comme définition du couple :
+$$(x,y) := \{\{x\},\{x,y\}\}$$
+
+On remarque alors que si $x$ et $y$ sont distincts, $(x,y) \ne (y,x)$.
+
+On remarque également que, telle qu'on l'a définie, $(x,y) \in \mathcal{P}(\mathcal{P}(X \cup Y))$
+\\
+
+Une fois la notion de couple définie, on va pouvoir définir le produit cartésien par compréhension, comme un sous-ensemble de $\mathcal{P}(\mathcal{P}(X \cup Y))$.
+
+$$\boxed{X \times Y := \{ c \in \mathcal{P}(\mathcal{P}(X \cup Y)) \; ; \; \exists x \exists y \forall z, [x \in X] \wedge [y \in Y] \wedge [(z \in c) \Rightarrow (z = \{x\} \lor z = \{x,y\})]\}}$$
+
+Pour comprendre cette définition, on doit se convaincre qu'ici, $c = (x,
+y)$, et que la propriété vérifiée par tous les éléments $c \in X \times Y$ est la suivante :
+
+"Il existe un élément $x$ de $X$ et un élément $y$ de $Y$ tels que, les seuls éléments de $c$ soient $\{x\}$ et $\{x,y\}$."
+
+\subsubsection{Définition de l'addition}
+
+On va ensuite utiliser la définition de l'addition dans l'arithmétique de Peano pour définir celle qui nous intéresse ici.
+
+En l'occurrence, il va s'agir de définir l'ensemble $Add$ par compréhension, comme un sous-ensemble de $\mathbb{N} \times \mathbb{N} \times \mathbb{N}$
+
+Grossièrement, on va avoir $Add = \{ (x,y,z) \in \mathbb{N}^3 \; ; \; x+y = z \}$
+
+On rappelle que dans l'arithmétique de Peano, l'opération d'addition est définie comme suit (avec $s$ la succession de ladite arithmétique):
+$$\forall n \in \mathbb{N}, n + 0 = n$$
+$$\forall (n,p) \in \mathbb{N}^2, n + s(p) = s(n+p)$$
+
+On s'en inspire donc pour définir la propriété $P$ :
+$$P(X) \equiv [\forall n, (n \in \mathbb{N}) \Rightarrow ((n,0,n) \in X)] \wedge [\forall n \forall p \forall r, ((n,p,r) \in X) \Rightarrow ((n,S(p),S(r)) \in X)]$$
+
+Chacune des deux implications est la traduction du point respectif de la définition de l'addition dans l'arithmétique de Peano, en notant $n+p = r$.
+
+On pourrait croire que tout ensemble X vérifiant cette propriété définit correctement l'addition, cependant, il n'en est rien : l'ensemble $\mathbb{N}^3$ contenant tous les triplets, il vérifie en particulier ces propriétés.
+
+On va donc définir $Add$ comme on l'a fait pour $\mathbb{N}$ à savoir le plus petit ensemble, au sens de l'inclusion, vérifiant la propriété $P$ :
+
+$$Add := \{(x,y,z) \in \mathbb{N}^3 \; ; \; \forall X, P(X) \Rightarrow (x,y,z) \in X\}$$
+
+\subsubsection{Toute addition a un résultat}
+
+\textbf{Théorème}
+$$\forall (x,y) \in \mathbb{N}^2, \exists z \in \mathbb{N} \; ; \; (x,y,z) \in Add$$
+
+La démonstration consiste en une récurrence sur $y$ pour $x$ fixé quelconque dans $\mathbb{N}$. De par la définition de $Add$, on pourra toujours construire un $z$ tel que $(x,y,z) \in Add$.
+
+
+
+
+
+\end{document}
